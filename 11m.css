@@ -187,15 +187,16 @@
             .itm-body { display: table; height: 1%; }
 
             div.cartodb-popup .itm-map { margin-bottom: 10px; }
-            /*
-                #map { opacity: .7; }
-            */
+            
+            
+            #map { min-height: 474px !important; }
+            
 
 
             .nav-arrow {  text-indent: -9000px; }
                 .nav-arrow a { display: block; width: 68px; height: 100%; 
                     background: url(images/nav.png) no-repeat;
-                    opacity: .5;
+                    opacity: 1;
                     -webkit-transition: opacity .6s;
                     transition:width opacity .6s;
                 }
@@ -203,10 +204,10 @@
                     opacity: 1; 
                 }
                 .nav-arrow li  { position: absolute; top: 165px; bottom: 0;  z-index: 4; }
-                .nav-arrow-prev { left: 0; }
+                .nav-arrow-prev { left: 10px; }
                     .nav-arrow-prev a { background-position: 6px center; }
 
-                .nav-arrow-next { right: 0; }
+                .nav-arrow-next { right: 10px; }
                     .nav-arrow-next a { background-position: -55px center; }
 
 
@@ -234,6 +235,7 @@
                 display: block;
                 width:41px;
                 height: 41px;
+                cursor: pointer;
             }
                 .play { background-position: -7px -1px; }
                 .mute { background-position: -8px -46px; }

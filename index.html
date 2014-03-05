@@ -180,6 +180,14 @@
     <script>
 
 
+    var viewHeight = window.innerHeight;
+
+    document.querySelector('#map').style.height = (viewHeight-165)+'px';
+
+
+
+
+
     function addClass(node, classAdd){
       node.className += ' ' + classAdd;
     } 
@@ -334,10 +342,15 @@
       window.onload = main();
 
 
-
+    function detectHeight(){
+        var viewHeight = window.innerHeight;
+        document.querySelector('#map').style.height = (viewHeight-165)+'px';
+    }
 
 
     window.addEventListener("load", function(){
+
+        detectHeight();
 
 
         var container = document.querySelector('#play');
@@ -361,6 +374,11 @@
         });
 
 
+    });
+
+
+    window.addEventListener("resize", function(){
+         detectHeight();
     });
 
 
