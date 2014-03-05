@@ -219,15 +219,23 @@
             .ply-status { 
                 display: inline-block;
                 vertical-align: middle;
+                border-right: 1px solid rgba(0, 0,  0, .1);
+                margin-right: 8px;
             }
             .ply-progress { 
                 display: inline-block;
-                height: 1px;
-                width: 315px;
-                background: #fff;
+                height: 36px;
+                width: 305px;
+                background: url(images/wave.png) no-repeat left 0;
                 vertical-align: middle;
             }
-                .ply-progress > span{ display: block; background: #000; height: 1px; }
+                .ply-progress > span{ 
+                    display: block;
+                    height: 36px;
+                    background: url(images/wave.png) no-repeat left -36px;
+                    -webkit-transition: width .2s;
+                    transition:width width .2s;
+                 }
 
             .ply-icon {
                 background-image: url(images/player-graphics.png);
@@ -236,6 +244,7 @@
                 width:41px;
                 height: 41px;
                 cursor: pointer;
+                border-right: 1px solid rgba(255, 255, 255, .1);
             }
                 .play { background-position: -7px -1px; }
                 .mute { background-position: -8px -46px; }
