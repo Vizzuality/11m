@@ -25,13 +25,11 @@
 
 
         <div class="cartodb-popup">
-        <!--
-          <a href="#close" class="cartodb-popup-close-button close">x</a>-->
 
            <div class="cartodb-popup-content-wrapper">
              <div class="cf itm-map">
                <div class="itm-media">
-                <img src="images/demo.jpg" class="img-decoration" />
+                <img src="{{content.data.foto}}" class="img-decoration" />
                </div>
                <div class="itm-body">
                <!-- content.data contains the field info -->
@@ -40,12 +38,19 @@
               </div>
              </div>
 
-        <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" controls autoplay  >
-          <p>Your browser does not support the audio element </p>
-        </audio>
+              <div class="player">
+                  <div class="ply-status">
+                    <span class="ply-icon play hide" id="ply-actions"></span>
+                    <span class="ply-icon mute" id="ply-actions-mute"></span>
+                  </div>
+                  <div class="ply-progress">
+                    <span style="width: 20%;"></span>
+                  </div>
+              </div>
 
-
-
+              
+                <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" class="hide">
+                </audio>
 
            </div>
            <div class="cartodb-popup-tip-container"></div>
@@ -55,13 +60,9 @@
 
   <script type="infowindow/html" id="infowindow_template_2">
         <div class="cartodb-popup">
-          <!--
-          <a href="#close" class="cartodb-popup-close-button close">x</a>
-          -->
-
            <div class="cartodb-popup-content-wrapper content_template_2">
              <div class="cf itm-map">
-                <img src="images/demo_2.jpg" class="img_decoration_2"/>
+                <img src="{{content.data.foto}}" class="img_decoration_2"/>
 
                 <!-- content.data contains the field info -->
                  <h4 class="info-title">{{{content.data.descripcion}}}</h4>
@@ -71,7 +72,8 @@
 
               <div class="player">
                   <div class="ply-status">
-                    <span class="ply-icon play" id="ply-actions"></span>
+                    <span class="ply-icon play hide" id="ply-actions"></span>
+                    <span class="ply-icon mute" id="ply-actions-mute"></span>
                   </div>
                   <div class="ply-progress">
                     <span style="width: 20%;"></span>
@@ -79,8 +81,8 @@
               </div>
 
               
-        <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" controls>
-        </audio>
+            <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" class="hide">
+            </audio>
 
            </div>
            <div class="cartodb-popup-tip-container"></div>
@@ -178,6 +180,17 @@
     <script>
 
 
+    function addClass(node, classAdd){
+      node.className += ' ' + classAdd;
+    } 
+
+
+    function removeClass(node, classRemove){
+      node.className = node.className.replace(classRemove,"");
+    }
+
+
+
     var story = Odyssey.Story();
 
 
@@ -204,16 +217,16 @@
             description: false,
             search: false,
             tiles_loader: false,
-            center_lat: 40.39885600103786,
-            center_lon: -3.752206420898437,
-            zoom: 12
+            center_lat: 40.40885600103786,
+            center_lon: -3.702206420898437,
+            zoom: 14
         })
         .done(function(vis, layers) {
           
             var progressByID = {};
             map = vis.getNativeMap();
 
-            map.options.minZoom = 12;
+            map.options.minZoom = 14;
             
             // sublayer 3 contains the markers
             var sublayer = layers[1].getSubLayer(3);
@@ -231,11 +244,23 @@
 
     
 
-            function playAudio(){
+                function playAudio(){
                     document.querySelector('#ply-actions').addEventListener("click", function(e){
-                        sound.play();
+                            sound.play();
+                            addClass(document.querySelector('#ply-actions'), 'hide');
+                            removeClass(document.querySelector('#ply-actions-mute'), 'hide');
                     });
-            }
+                }
+
+
+                function pauseAudio(){
+                    var iconPause = document.querySelector('#ply-actions-mute');
+                    iconPause.addEventListener("click", function(e){
+                        sound.pause();
+                        addClass(document.querySelector('#ply-actions-mute'), 'hide');
+                        removeClass(document.querySelector('#ply-actions'), 'hide');
+                    });
+                }
 
 
               // Odyssey actions
@@ -246,11 +271,13 @@
                   layers[1].infowindow.bind('domready', function ready() {
                     layers[1].infowindow.unbind('domready', ready);
                     self.finish();
-                    
                     sound = new Howl({
                           urls: [url]
                     });
+                    sound.play();
+                    pauseAudio();
                     playAudio();
+
                   });
                   return true;
                 })
@@ -263,11 +290,12 @@
                 })
               } 
 
+              var sound;
               function killAudio() {
                 return O.Action (function(){
-                  if (document.querySelector("#audioPlayer")) {
-                    sound.stopAudio();
-                  }
+                    if(sound) {
+                      sound.unload();
+                    }
                 })
               }
 
@@ -303,7 +331,7 @@
         });
       }
 
-      window.onload = main;
+      window.onload = main();
 
 
 
@@ -311,14 +339,6 @@
 
     window.addEventListener("load", function(){
 
-        function addClass(node, classAdd){
-          node.className += ' ' + classAdd;
-        } 
-
-
-        function removeClass(node, classRemove){
-          node.className = node.className.replace(classRemove,"");
-        }
 
         var container = document.querySelector('#play');
 
