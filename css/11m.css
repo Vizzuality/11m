@@ -1,0 +1,15 @@
+.cf:after {
+	content:"";
+	display: block;
+	clear: both;
+}
+
+
+.mod-home { 
+	position: absolute;
+	padding: 25px;
+	background: #fff;
+	width: 364px;
+	left: 20%;
+	top: 100px; 
+}
