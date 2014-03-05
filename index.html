@@ -423,7 +423,7 @@
 
 
 
-      var story = Odyssey.Story();
+    var story = Odyssey.Story();
 
 
     function openInfowindow(layer, latlng, cartodb_id, template) {
@@ -438,6 +438,9 @@
         seq = O.Triggers.Sequential();
 
         var sql = cartodb.SQL ({user:'cadenaser'});
+
+        O.Triggers.Keys().on(document).left().then(seq.prev, seq)
+        O.Triggers.Keys().on(document).right().then(seq.next, seq)
         
 
         cartodb.createVis('map', 'http://cadenaser.cartodb.com/api/v2/viz/1b44ec62-a2dd-11e3-bf1a-0e230854a1cb/viz.json', {
