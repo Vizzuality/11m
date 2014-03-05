@@ -452,8 +452,8 @@
         })
         .done(function(vis, layers) {
           
-           progressByID = {};
-           map = vis.getNativeMap();
+            var progressByID = {};
+            map = vis.getNativeMap();
 
             map.options.minZoom = 12;
             
@@ -505,24 +505,21 @@
                 })
               }
 
-              for ( i=0; i<data.rows.length; i++) {
+              for (i  =0; i < data.rows.length; ++i) {
                   var row = data.rows[i];
                   var layer = layers[1];
-
-                  progressByID[row.cartodb_id] =  (i+1)/data.rows.length;
+                  progressByID[row.cartodb_id] = (i+1)/data.rows.length;
                   story.addState(
-
-
-                  seq.step(i),
-                  O.Chain(
-                      progressBar((i+1)/data.rows.length),
-                      killAudio(),
-                      closeInfoWindowAction(),
-                      map.actions.setView(L.latLng(row.lat, row.lon), 14),
-                      /*map.actions.setZoom(16),*/
-                      O.Actions.Sleep(1500),
-                      openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow)
-                  )
+                    seq.step(i),
+                    O.Chain(
+                        progressBar((i+1)/data.rows.length),
+                        killAudio(),
+                        closeInfoWindowAction(),
+                        map.actions.setView(L.latLng(row.lat, row.lon), 14),
+                        /*map.actions.setZoom(16),*/
+                        O.Actions.Sleep(1500),
+                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow)
+                    )
                 )
               }
           })
