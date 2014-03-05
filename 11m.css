@@ -13,6 +13,13 @@
         }
 
 
+        div.cartodb-zoom {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+
         body div.cartodb-popup div.cartodb-popup-content-wrapper.content_template_2 {
             width: 375px;
             max-width: 375px;
@@ -78,7 +85,7 @@
 
         .mod-home { 
             position: absolute;
-            padding: 25px 25px 0;
+            padding: 19px 25px 0;
             background: #fff;
             background: rgba(255, 255, 255, .9);
             width: 370px;
@@ -106,26 +113,43 @@
             .mod-home h1 { 
                 font: 60px/1 'Lato'; font-weight: 300;
                 letter-spacing: -1px;
-                margin-bottom: 25px;
-                padding-bottom: 15px;
+                margin-bottom: 15px;
                 position: relative;
             }
             .mod-home h1 strong { font-weight: 900; }
-            .mod-home h1:before {
+            .mod-home p:before {
                 content:"";
                 position: absolute;
                 left: 0;
-                bottom: -10px;
+                top: 0;
                 width: 50px;
                 background: #999;
                 height: 1px;
             }
             .mod-home p {
+                padding-top: 15px;
+                position: relative;
                 color: #777;
                 font: 15px/20px 'Lato'; font-weight: 300;
                 margin-right: 80px;
+                margin-top: 15px; 
             }
 
+            .share ul {
+                background: #333;
+                display: inline-block;
+                border-radius: 4px;
+            }
+                .share li { display: inline-block; border-left: 1px solid #fff; text-indent: -9000px;}
+                .share li:first-child { border: 0;}
+                .share .tw a { background-position: -6px -164px; }
+                .share .fb a { background-position: 2px -111px; }
+                .share li a { 
+                    display: block;
+                    width: 35px;
+                    height: 30px;
+                    background: url(images/buttons-sprite.png) no-repeat;
+                }
             .hm-play { 
                 position: absolute;
                 width: 120px;
@@ -169,10 +193,16 @@
                 margin: 0;
                 padding: 0 0 7px;
                 font: normal 14px 'Lato';
-                font-weight: 900;
+                font-weight: 400;
                 color: #444;
             }
-
+            body div.cartodb-popup p span {
+                display: inline-block;
+                padding: 4px 8px;
+                background: #e5e5e5;
+                border-radius: 4px;
+                font-weight: 900;
+            }
 
             .cf:after {
                 content:"";

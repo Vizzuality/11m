@@ -154,6 +154,12 @@
 
   <section id="home" class="mod-home">
     <h1>Los sonidos <br/>del <strong>11M</strong></h1>
+    <div class="share">
+        <ul>
+            <li class="fb"><a href="#">hola</a></li>
+            <li class="tw"><a href="#">hola</a></li>
+        </ul>
+    </div>
     <p>Recorrido cronológico y sonoro que comienza pasadas las 07:30 horas del 11 de marzo de 2004 con las explosiones casi simultáneas en trenes de la red de Cercanías de Madrid en las estaciones de Atocha, Santa Eugenia y El Pozo. Las crónicas de los periodistas de la Cadena SER, las declaraciones de los responsables políticos, el avance de las investigaciones, la solidaridad de los ciudadanos y el triunfo del PSOE en las elecciones del 14-M</p>
     <div class="hm-play h-valign">
       <a href="#" class="h-inb">
@@ -247,10 +253,24 @@
 
           sql.execute ( 'SELECT * FROM "table_11_m_20cartodb_20_20hoja_201" ORDER BY cartodb_id').done(function (data) {
 
+                /* audio variable */
 
-    
+                var audioLoad;
+
+                function intervalAudio(){
+                    var duration = sound._duration;
+                   actualTime = sound.pos();
+                   if (actualTime == 0 ) {
+                     document.querySelector('#ply-progress-bar').style.width = 100+'%';
+                   } else {
+                     document.querySelector('#ply-progress-bar').style.width = ((actualTime*100)/duration)+'%';
+                   }
+                }
+
+
 
                 function playAudio(){
+                    audioLoad = setInterval(intervalAudio, 100);
                     document.querySelector('#ply-actions').addEventListener("click", function(e){
                             sound.play();
                             addClass(document.querySelector('#ply-actions'), 'hide');
@@ -260,6 +280,7 @@
 
 
                 function pauseAudio(){
+                    clearInterval(audioLoad);
                     var iconPause = document.querySelector('#ply-actions-mute');
                     iconPause.addEventListener("click", function(e){
                         sound.pause();
@@ -267,7 +288,7 @@
                         removeClass(document.querySelector('#ply-actions'), 'hide');
                     });
                 }
-
+               
 
               // Odyssey actions
               function openInfoWindowAction(lat,lon,cartodbid, template, url) {
@@ -288,42 +309,14 @@
                     var actualTime;
 
                     audio = document.getElementById("audioPlayer");
-                    audio.addEventListener("loadedmetadata", function() {
-                        duration = audio.duration;
-                    });
 
-                    $('#audioPlayer').on('timeupdate', function() {
+
+
+                    sound.on ('end', function(){
+                        seq.next();
                         console.log("hola");
-//                        $('#seekbar').attr("value", this.currentTime / this.duration);
-                    });
-
-                  /*
-                    var audio_clock;
-                     
-                    $(audio).on("timeupdate", onAudioUpdate);
-                    $(audio).on("play", function(){
-                            audio_clock = setInterval(function(){
-                                    onAudioUpdate();
-                                }, 100);
-                        });
-                    $(audio).on("pause", function(){
-                            clearInterval(audio_clock);
-                        });
-                     
-                    function onAudioUpdate() {
-                        console.log(audio_clock);
-                    }*/
-
-                    
-
-
-                   // audio.addEventListener('ontimeupdate', function (){
-                   //     actualTime = audio.currentTime;
-                   //     console.log(actualTime);
-                   //     document.querySelector('#ply-progress-bar').style.width = ((actualTime*100)/duration)+'%';
-                   // });
-
-
+                    })
+                
                     pauseAudio();
                     playAudio();
 
@@ -346,6 +339,7 @@
                       sound.unload();
                     }
                 })
+                sound.off ('end');
               }
 
               function progressBar(step) {
@@ -367,7 +361,7 @@
                         killAudio(),
                         closeInfoWindowAction(),
                         map.actions.setView(L.latLng(row.lat, row.lon), 14),
-                        O.Actions.Sleep(1500),
+                        O.Actions.Sleep(750),
                         openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow, row.url_audio)
                     )
                 )
@@ -426,7 +420,16 @@
     </script>
 
 
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+      ga('create', 'UA-20934186-18', 'cadenaser.com');
+      ga('send', 'pageview');
+
+    </script>
 
 
 
