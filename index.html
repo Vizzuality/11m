@@ -13,6 +13,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <link rel="stylesheet" href="11m.css" />
 
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
 
@@ -20,259 +21,6 @@
   <script src="js/audio.min.js"></script>
 
   
-
-
-
-  <style type="text/css">
-    .cartodb-popup-content h2 { font: 30px 'Lato'; font-weight: 700;  }
-    .cartodb-popup p.map-date { color: #444; font: 14px 'Lato'; font-weight: 700;  text-align: right; }
-
-    body div.cartodb-popup div.cartodb-popup-content-wrapper { 
-      width: 400px;
-      max-width: 400px;
-      background-image: none;
-      background: #fff;
-      border-radius: 4px; 
-      padding: 20px;
-      position: relative;
-      overflow: visible;  
-    }
-
-
-    body div.cartodb-popup div.cartodb-popup-content-wrapper.content_template_2 {
-      width: 375px;
-      max-width: 375px;
-      padding-top: 0;
-    }
-
-    .img_decoration_2 { 
-      margin:-20px;
-      margin-bottom: 20px;
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-    }
-
-    body div.cartodb-popup div.cartodb-popup-content-wrapper:after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 0;
-      border: 10px solid rgba(0, 0, 0, 0);
-      border-top: 10px solid #FFF;
-      left: 18px;
-      bottom: -20px;
-    }
-
-    body div.cartodb-popup div.cartodb-popup-content-wrapper:before {
-      content:"";
-      position: absolute;
-      left: -4px;
-      top: -4px;
-      right: -4px;
-      bottom: -4px;
-      border: 4px solid rgba(0, 0, 0, .3);
-      z-index: -1;
-      border-radius: 4px;
-    }
-
-    body div.cartodb-popup div.cartodb-popup-tip-container {
-      background: none;
-      position: relative;
-    }
-
-    body div.cartodb-popup { 
-      background: none; width: 100%;
-    }
-
-
-    .hide { display: none; }
-
-    .timeline { 
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      padding: 0;
-      right: 0;
-    }
-      .timeline .time-inner { 
-        background: #F86800;
-        height: 4px;
-        display: block; 
-        -webkit-transition: width .6s;
-          transition:width width .6s;
-      }
-
-    .mod-home { 
-      position: absolute;
-      padding: 25px 25px 0;
-      background: #fff;
-      background: rgba(255, 255, 255, .9);
-      width: 370px;
-      left: 0;
-      top: 165px; 
-      bottom: 0;
-      z-index: 11;
-      
-      -webkit-transition: all .6s;
-        transition:width all .6s;
-    }
-      .mod-home.hide-home {
-        -webkit-transform: translateX(-460px);
-        transform: translateX(-460px);
-      }
-      .mod-home:before {
-        content:"";
-        position: absolute;
-        right: -4px;
-        top: 0;
-        bottom: 0;
-        border-right: 4px solid rgba(0, 0,  0, .2);
-      }
-
-      .mod-home h1 { 
-        font: 60px/1 'Lato'; font-weight: 300;
-        letter-spacing: -1px;
-        margin-bottom: 25px;
-        padding-bottom: 15px;
-        position: relative;
-      }
-      .mod-home h1 strong { font-weight: 900; }
-      .mod-home h1:before {
-        content:"";
-        position: absolute;
-        left: 0;
-        bottom: -10px;
-        width: 50px;
-        background: #999;
-        height: 1px;
-      }
-      .mod-home p {
-        color: #777;
-        font: 15px/20px 'Lato'; font-weight: 300;
-        margin-right: 80px;
-      }
-
-      .hm-play { 
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        background: #EA6900;
-        border-radius: 50%; 
-        text-align: center;
-        right: -40px;
-        bottom: 50px;
-        border: 4px solid #FFF;
-      }
-        .hm-play a {
-          display: inline-block;
-          vertical-align: middle;
-          margin-left: -10px;
-        }
-      .h-valign:before {
-        content:"";
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-      }
-
-
-      div.cartodb-popup h4.info-title { 
-        font: 30px/1.2 'Lato';
-        font-weight: 900;
-        text-transform: none; 
-        color: #000;
-        margin-bottom: 10px; 
-        width: 100%;
-      }
-      
-      div.cartodb-popup h4.info-title span { font-size: 26px; font-weight: 300; display: block;  }
-
-
-      body div.cartodb-popup p {
-        display: block;
-        width: 100%;
-        max-width: auto;
-        margin: 0;
-        padding: 0 0 7px;
-        font: normal 14px 'Lato';
-        font-weight: 900;
-        color: #444;
-      }
-
-
-      .cf:after {
-        content:"";
-        display: block;
-        clear: both;
-      }
-
-
-      .img-decoration { border-radius: 50%; }
-
-      .itm-media { float: left; display: inline; margin-right: 20px; }
-      .itm-body { display: table; height: 1%; }
-
-      div.cartodb-popup .itm-map { margin-bottom: 10px; }
-      /*
-        #map { opacity: .7; }
-      */
-
-
-      .nav-arrow {  text-indent: -9000px; }
-        .nav-arrow a { display: block; width: 68px; height: 100%; 
-          background: url(images/nav.png) no-repeat;
-          opacity: .5;
-          -webkit-transition: opacity .6s;
-          transition:width opacity .6s;
-        }
-        .nav-arrow a:hover { 
-          opacity: 1; 
-        }
-        .nav-arrow li  { position: absolute; top: 165px; bottom: 0;  z-index: 4; }
-        .nav-arrow-prev { left: 0; }
-          .nav-arrow-prev a { background-position: 6px center; }
-
-        .nav-arrow-next { right: 0; }
-          .nav-arrow-next a { background-position: -55px center; }
-
-
-
-      .audiojs  {
-        display: block;
-        width: auto;
-        height: 41px;
-        background: #F46A00;
-        box-shadow: 0 0 0;
-        border-radius: 4px;
-      }
-        .audiojs .time { display: none; }
-        .audiojs .play-pause { 
-          float: none;
-          display: inline-block;
-          vertical-align: middle;
-          border: 0;
-          height: 41px;
-          padding: 0;
-          width: 56px;
-          margin: 0;
-
-        }
-        .audiojs .scrubber {
-          height: 1px;
-          margin: 0;
-          border: 0;
-          float: none;
-          display: inline-block;
-          vertical-align: middle;
-        }
-
-        .audiojs .play {
-          background: url("js/player-graphics.png") 0 0  no-repeat;
-        }
-
-
-  </style>
-
 
 
   <script type="infowindow/html" id="infowindow_template_1">
@@ -324,9 +72,18 @@
              </div>
 
 
+	            <div class="player">
+	            		<div class="ply-status" id="ply-actions">
+	            			<span class="ply-icon play"></span>
+	            		</div>
+	            		<div class="ply-progress">
+	            			<span style="width: 20%;"></span>
+	            		</div>
+	            </div>
 
-        <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" controls autoplay  style="display:none;">
-        </audio>
+	            
+				<audio id="audioPlayer"  src="{{{content.data.url_audio}}}" controls>
+				</audio>
 
            </div>
            <div class="cartodb-popup-tip-container"></div>
@@ -416,14 +173,24 @@
 
 <!-- include cartodb.js library -->
     <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.uncompressed.js"></script>
-    <script src="js/odyssey.js"></script>
+
+  	<script src="js/odyssey.js"></script>
+  	<script src="js/howler.min.js"></script>
 
 
     <script>
 
+    /*
+		posToTime: function(pos) {
+		    return pos * 60 * this.options.timeRange / 100;
+		}
 
+		  timeToPos: function(time) {
+		    return 100 * time / (60 * this.options.timeRange);
+		}*/
 
-      var story = Odyssey.Story();
+    var story = Odyssey.Story();
+
 
 
     function openInfowindow(layer, latlng, cartodb_id, template) {
@@ -460,14 +227,7 @@
             // sublayer 3 contains the markers
             var sublayer = layers[1].getSubLayer(3);
             var layer = layers[1];
-            layer.infowindow.bind('change:content', function(){
-              audiojs.events.ready(function() {
-                  if ($('audio').length > 1){
-                    console.log("echo2");
-                  }
-                  var as = audiojs.createAll();
-                });
-            });
+            layer.infowindow.bind('change:content');
 
 
             sublayer.on('featureClick', function (e, latlong, pos, data){
@@ -478,10 +238,11 @@
           sql.execute ( 'SELECT * FROM "table_11_m_20cartodb_20_20hoja_201" ORDER BY cartodb_id').done(function (data) {
 
               // Odyssey actions
-              function openInfoWindowAction(lat,lon,cartodbid, template) {
+              function openInfoWindowAction(lat,lon,cartodbid, template, callback) {
                 return O.Action (function(){  
                   openInfowindow(layers[1], [+lat, +lon], cartodbid, template);
                 })
+      
               }
 
               function closeInfoWindowAction() {
@@ -505,6 +266,15 @@
                 })
               }
 
+             function playAudio(){
+          	    return O.Action (function(){
+	              	document.querySelector('#ply-actions').addEventListener("click", function(e){
+			        	console.log("hola");
+			        	/*sound.play();*/
+			        });
+			    })
+              }
+
               for (i  =0; i < data.rows.length; ++i) {
                   var row = data.rows[i];
                   var layer = layers[1];
@@ -518,7 +288,8 @@
                         map.actions.setView(L.latLng(row.lat, row.lon), 14),
                         /*map.actions.setZoom(16),*/
                         O.Actions.Sleep(1500),
-                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow)
+                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow),
+                        playAudio()
                     )
                 )
               }
@@ -554,17 +325,18 @@
            addClass(document.querySelector('#home'), 'hide-home');
            removeClass(document.querySelector('#time'), 'hide');
            removeClass(document.querySelector('#nav'), 'hide');
-        })
+        });
+
 
 
         document.querySelector('#prev').addEventListener("click", function(e){
            seq.prev()
-        })
+        });
 
 
         document.querySelector('#next').addEventListener("click", function(e){
            seq.next()
-        })
+        });
 
 
     });

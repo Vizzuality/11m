@@ -211,36 +211,23 @@
 
 
 
-			.audiojs  {
-				display: block;
-				width: auto;
-				height: 41px;
-				background: #F46A00;
-				box-shadow: 0 0 0;
-				border-radius: 4px;
+		.player { 
+			background: #F46A00;
+			border-radius: 4px;
+		}
+			.ply-status { 
+				display: inline-block;
+				vertical-align: middle;
 			}
-				.audiojs .time { display: none; }
-				.audiojs .play-pause { 
-					float: none;
-					display: inline-block;
-					vertical-align: middle;
-					border: 0;
-					height: 41px;
-					padding: 0;
-					width: 56px;
-					margin: 0;
+			.ply-progress { display: inline-block; height: 1px; width: 300px; background: #fff; }
+				.ply-progress > span{ display: block; background: #000; height: 1px; }
 
-				}
-				.audiojs .scrubber {
-					height: 1px;
-					margin: 0;
-					border: 0;
-					float: none;
-					display: inline-block;
-					vertical-align: middle;
-				}
-
-				.audiojs .play {
-					background: url("js/player-graphics.png") 0 0  no-repeat;
-				}
-
+			.ply-icon {
+				background-image: url(images/player-graphics.png);
+				background-repeat: no-repeat;
+				display: block;
+				width:56px;
+				height: 41px;
+			}
+				.play { background-position:  0 0; }
+				.pause { background-position: 0 -41px; }
