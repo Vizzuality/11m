@@ -10,17 +10,14 @@
 
 
 
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
-    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-    <link rel="stylesheet" href="11m.css" />
-
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+<link rel="stylesheet" href="11m.css" />
+    
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
 
 
-  <script src="js/audio.min.js"></script>
-
-  
 
 
   <script type="infowindow/html" id="infowindow_template_1">
@@ -73,8 +70,8 @@
 
 
               <div class="player">
-                  <div class="ply-status" id="ply-actions">
-                    <span class="ply-icon play"></span>
+                  <div class="ply-status">
+                    <span class="ply-icon play" id="ply-actions"></span>
                   </div>
                   <div class="ply-progress">
                     <span style="width: 20%;"></span>
@@ -180,14 +177,6 @@
 
     <script>
 
-    /*
-    posToTime: function(pos) {
-        return pos * 60 * this.options.timeRange / 100;
-    }
-
-      timeToPos: function(time) {
-        return 100 * time / (60 * this.options.timeRange);
-    }*/
 
     var story = Odyssey.Story();
 
@@ -239,14 +228,29 @@
 
           sql.execute ( 'SELECT * FROM "table_11_m_20cartodb_20_20hoja_201" ORDER BY cartodb_id').done(function (data) {
 
+
+    
+
+            function playAudio(){
+                    document.querySelector('#ply-actions').addEventListener("click", function(e){
+                        sound.play();
+                    });
+            }
+
+
               // Odyssey actions
-              function openInfoWindowAction(lat,lon,cartodbid, template, callback) {
+              function openInfoWindowAction(lat,lon,cartodbid, template, url) {
                 return O.Action (function(){  
                   var self = this;
                   openInfowindow(layers[1], [+lat, +lon], cartodbid, template);
                   layers[1].infowindow.bind('domready', function ready() {
                     layers[1].infowindow.unbind('domready', ready);
                     self.finish();
+                    
+                    sound = new Howl({
+                          urls: [url]
+                    });
+                    playAudio();
                   });
                   return true;
                 })
@@ -262,7 +266,7 @@
               function killAudio() {
                 return O.Action (function(){
                   if (document.querySelector("#audioPlayer")) {
-                    document.querySelector("#audioPlayer").pause();
+                    sound.stopAudio();
                   }
                 })
               }
@@ -274,14 +278,6 @@
                 })
               }
 
-             function playAudio(){
-                return O.Action (function(){
-                  document.querySelector('#ply-actions').addEventListener("click", function(e){
-                console.log("hola");
-                /*sound.play();*/
-              });
-          })
-              }
 
               for (i  =0; i < data.rows.length; ++i) {
                   var row = data.rows[i];
@@ -294,10 +290,8 @@
                         killAudio(),
                         closeInfoWindowAction(),
                         map.actions.setView(L.latLng(row.lat, row.lon), 14),
-                        /*map.actions.setZoom(16),*/
                         O.Actions.Sleep(1500),
-                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow),
-                        playAudio()
+                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow, row.url_audio)
                     )
                 )
               }
