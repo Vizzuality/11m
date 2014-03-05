@@ -34,7 +34,7 @@
                <div class="itm-body">
                <!-- content.data contains the field info -->
                  <h4 class="info-title">{{{content.data.descripcion}}}</h4>
-                 <p class="info-date">{{content.data.fecha_y_hora}}</p>
+                 <p class="info-date">{{{content.data.fecha_y_hora}}}</p>
               </div>
              </div>
 
@@ -66,7 +66,7 @@
 
                 <!-- content.data contains the field info -->
                  <h4 class="info-title">{{{content.data.descripcion}}}</h4>
-                 <p class="info-date">{{content.data.fecha_y_hora}}</p>
+                 <p class="info-date">{{{content.data.fecha_y_hora}}}</p>
              </div>
 
 
@@ -76,12 +76,12 @@
                     <span class="ply-icon mute" id="ply-actions-mute"></span>
                   </div>
                   <div class="ply-progress">
-                    <span style="width: 20%;"></span>
+                    <span style="" id="ply-progress-bar"></span>
                   </div>
               </div>
 
               
-            <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" class="hide">
+            <audio id="audioPlayer"  src="{{{content.data.url_audio}}}"  class="hide">
             </audio>
 
            </div>
@@ -186,8 +186,6 @@
 
 
 
-
-
     function addClass(node, classAdd){
       node.className += ' ' + classAdd;
     } 
@@ -279,10 +277,53 @@
                   layers[1].infowindow.bind('domready', function ready() {
                     layers[1].infowindow.unbind('domready', ready);
                     self.finish();
+
+
                     sound = new Howl({
                           urls: [url]
                     });
                     sound.play();
+
+                    var duration;
+                    var actualTime;
+
+                    audio = document.getElementById("audioPlayer");
+                    audio.addEventListener("loadedmetadata", function() {
+                        duration = audio.duration;
+                    });
+
+                    $('#audioPlayer').on('timeupdate', function() {
+                        console.log("hola");
+//                        $('#seekbar').attr("value", this.currentTime / this.duration);
+                    });
+
+                  /*
+                    var audio_clock;
+                     
+                    $(audio).on("timeupdate", onAudioUpdate);
+                    $(audio).on("play", function(){
+                            audio_clock = setInterval(function(){
+                                    onAudioUpdate();
+                                }, 100);
+                        });
+                    $(audio).on("pause", function(){
+                            clearInterval(audio_clock);
+                        });
+                     
+                    function onAudioUpdate() {
+                        console.log(audio_clock);
+                    }*/
+
+                    
+
+
+                   // audio.addEventListener('ontimeupdate', function (){
+                   //     actualTime = audio.currentTime;
+                   //     console.log(actualTime);
+                   //     document.querySelector('#ply-progress-bar').style.width = ((actualTime*100)/duration)+'%';
+                   // });
+
+
                     pauseAudio();
                     playAudio();
 
