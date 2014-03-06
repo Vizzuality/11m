@@ -213,11 +213,11 @@ var Core = _dereq_('../core');
 
 function Slides(el) {
 
-  var slideElements = Core.getElement(el).children;
   
   function slides() {};
 
   function _activate(idx) {
+    var slideElements = Core.getElement(el).children;
     for(var i = 0; i < slideElements.length; ++i) {
       if (i === idx) {
         slideElements[i].style.display = "block";
@@ -225,7 +225,7 @@ function Slides(el) {
         slideElements[i].style.display = "none";
       }
     }
-  };
+  }
 
   slides.activate = function(i) {
     return Action(function() {
@@ -267,6 +267,7 @@ _dereq_('../../vendor/d3.custom');
 function Story() {
 
   var triggers = [];
+  var events = [];
   var currentState = null;
   var prevState = null;
 
@@ -278,12 +279,34 @@ function Story() {
     trigger._story(story, function() {
       action.enter();
     });
+    events.push({
+      a: trigger,
+      b: action
+    });
     return story;
+  };
+
+  story.clear = function() {
+    var all = triggers.concat(events);
+    for(var i = 0; i < all.length; ++i) {
+      var a = all[i];
+      a.a.story = null;
+      a.a.trigger = null;
+    }
+
+    triggers = [];
+    events = [];
+    currentState = null;
+    prevState = null;
+
   };
 
   // go to state index
   story.go = function(index, opts) {
     opts = opts || {};
+    if(index > triggers.length) {
+      throw new Error("index should be less than states length");
+    }
     if (story.state() !== index) {
 
       if (opts.reverse) {
@@ -557,6 +580,7 @@ module.exports = {
 },{"./keys":13,"./scroll":14,"./sequential":15}],13:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
+var Core = _dereq_('../core');
 
 /**
  *
@@ -569,50 +593,49 @@ function Keys() {
   KEY_RIGHT = 39;
   KEY_DOWN = 40;
 
+  var el = document;
+
+  var keys = {};
+
   function listenForKey(el, k, callback) {
     el.addEventListener('keydown', function(e) {
        var code = e.keyCode;
        if (code === k) {
          callback();
+         e.preventDefault();
+         e.stopPropagation()
        }
-       e.preventDefault();
     });
   }
 
-  function on(el) {
-
-    function left() {
-      var t = Trigger({});
-      listenForKey(el, KEY_LEFT, function() {
-        t.trigger();
-      });
-      return t;
-    }
-
-    function right() {
-      var t = Trigger({});
-      listenForKey(el, KEY_RIGHT, function() {
-        t.trigger();
-      });
-      return t;
-    }
-
-    return {
-      left: left,
-      right: right
-    };
-
+  keys.left = function() {
+    var t = Trigger({});
+    listenForKey(el, KEY_LEFT, function() {
+      t.trigger();
+    });
+    return t;
   }
 
-  return {
-    on: on
-  };
+  keys.right = function() {
+    var t = Trigger({});
+    listenForKey(el, KEY_RIGHT, function() {
+      t.trigger();
+    });
+    return t;
+  }
+
+  keys.on = function(element) {
+    el = Core.getElement(element);
+    return keys;
+  }
+
+  return keys;
 
 }
 
 module.exports = Keys;
 
-},{"../story":11}],14:[function(_dereq_,module,exports){
+},{"../core":10,"../story":11}],14:[function(_dereq_,module,exports){
 
 var Trigger = _dereq_('../story').Trigger;
 var Core = _dereq_('../core');
@@ -772,7 +795,7 @@ function Sequential() {
   seq.step = function(n) {
     var t = Trigger({ 
       check: function() {
-        if (n === current) this.trigger();
+        if (n === current && this.trigger) this.trigger();
       }
     });
     max = Math.max(max, n);
@@ -786,6 +809,13 @@ function Sequential() {
       current = 0;
     }
     update();
+  };
+
+  seq.clear = function() {
+    steps = [];
+    max = 0;
+    current = 0;
+    return seq;
   };
 
   seq.prev = function() {

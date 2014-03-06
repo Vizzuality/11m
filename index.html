@@ -225,6 +225,7 @@
 
 
     var story = Odyssey.Story();
+    var sublayer;
 
 
       function openInfowindow(layer, latlng, cartodb_id, template) {
@@ -240,8 +241,8 @@
 
         var sql = cartodb.SQL ({user:'cadenaser'});
 
-        O.Triggers.Keys().on(document).left().then(seq.prev, seq)
-        O.Triggers.Keys().on(document).right().then(seq.next, seq)
+        O.Triggers.Keys().left().then(seq.prev, seq)
+        O.Triggers.Keys().right().then(seq.next, seq)
         
 
         cartodb.createVis('map', 'http://cadenaser.cartodb.com/api/v2/viz/1b44ec62-a2dd-11e3-bf1a-0e230854a1cb/viz.json', {
@@ -257,12 +258,13 @@
         .done(function(vis, layers) {
           
             var progressByID = {};
+            var templateByID = {};
             map = vis.getNativeMap();
 
             map.options.minZoom = 14;
             
             // sublayer 3 contains the markers
-            var sublayer = layers[1].getSubLayer(3);
+            sublayer = layers[1].getSubLayer(3);
             var layer = layers[1];
             layer.infowindow.bind('change:content');
 
@@ -271,6 +273,13 @@
               var dataClick = data.cartodb_id;
               document.querySelector('#timebar').style.width = (progressByID[dataClick])*100+'%'
             })
+            layer.infowindow.bind('change:content', function() {
+              var data = layer.infowindow.get('content').data
+              if(data && data.infowindow !== undefined) {
+                layer.infowindow.set('template', $('#infowindow_template_' + data.infowindow).html());
+              }
+            })
+            sublayer.setInteraction(false);
 
           sql.execute ( 'SELECT * FROM "table_11_m_20cartodb_20_20hoja_201" ORDER BY cartodb_id').done(function (data) {
 
@@ -374,6 +383,7 @@
                   var row = data.rows[i];
                   var layer = layers[1];
                   progressByID[row.cartodb_id] = (i+1)/data.rows.length;
+                  templateByID[row.cartodb_id] = row.infowindow;
                   story.addState(
                     seq.step(i),
                     O.Chain(
@@ -412,6 +422,7 @@
 
         container.addEventListener("click", function(e){
            story.go(0);       
+            sublayer.setInteraction(true);
            addClass(document.querySelector('#home'), 'hide-home');
            removeClass(document.querySelector('#time'), 'hide');
            removeClass(document.querySelector('#mini-header'), 'mod-hide');
