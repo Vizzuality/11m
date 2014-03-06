@@ -155,10 +155,15 @@
   <section id="home" class="mod-home">
     <h1>Los sonidos <br/>del <strong>11M</strong></h1>
     <div class="share">
-        <ul>
-            <li class="fb"><a href="#">hola</a></li>
-            <li class="tw"><a href="#">hola</a></li>
-        </ul>
+            <ul>
+                <li class="fb">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://livingcities.cartocdn.com&t=Living+Cities+%E2%80%94+A+shared+cartographic+experiment+from+HERE+and+CartoDB" target="_blank" class="button facebook">
+                    Compartir en FB</a>
+                </li>
+                <li class="tw">
+                  <a href="http://twitter.com/share?text=Los%20sonidos%20del%2011m%20shared&url=http%3A%2F%2F#&via=cadenaser.com" target="_blank" class="button twitter">Compartir en Twitter</a>
+                </li>
+            </ul>
     </div>
     <p>Recorrido cronológico y sonoro que comienza pasadas las 07:30 horas del 11 de marzo de 2004 con las explosiones casi simultáneas en trenes de la red de Cercanías de Madrid en las estaciones de Atocha, Santa Eugenia y El Pozo. Las crónicas de los periodistas de la Cadena SER, las declaraciones de los responsables políticos, el avance de las investigaciones, la solidaridad de los ciudadanos y el triunfo del PSOE en las elecciones del 14-M</p>
     <div class="hm-play h-valign">
@@ -166,6 +171,22 @@
         <img src="images/play-audio.png" alt="reproducir"  id="play" />
       </a>
     </div>
+  </section>
+
+
+  <section id="mini-header" class="mod-header mod-hide">
+        <h1>Los sonidos del <strong>11M</strong></h1>
+        <div class="share">
+            <ul>
+                <li class="fb">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://livingcities.cartocdn.com&t=Living+Cities+%E2%80%94+A+shared+cartographic+experiment+from+HERE+and+CartoDB" target="_blank" class="button facebook">
+                    Compartir en FB</a>
+                </li>
+                <li class="tw">
+                  <a href="http://twitter.com/share?text=Los%20sonidos%20del%2011m%20shared&url=http%3A%2F%2F#&via=cadenaser.com" target="_blank" class="button twitter">Compartir en Twitter</a>
+                </li>
+            </ul>
+        </div>
   </section>
 
   
@@ -314,7 +335,6 @@
 
                     sound.on ('end', function(){
                         seq.next();
-                        console.log("hola");
                     })
                 
                     pauseAudio();
@@ -394,6 +414,7 @@
            story.go(0);       
            addClass(document.querySelector('#home'), 'hide-home');
            removeClass(document.querySelector('#time'), 'hide');
+           removeClass(document.querySelector('#mini-header'), 'mod-hide');
            removeClass(document.querySelector('#nav'), 'hide');
         });
 

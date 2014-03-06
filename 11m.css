@@ -135,6 +135,36 @@
                 margin-top: 15px; 
             }
 
+
+        .mod-header { 
+            position: absolute;
+            padding: 20px;
+            background: rgba(255, 255, 255, .9);
+            left: -4px;
+            top: 190px; 
+            z-index: 11;
+            border-radius: 4px;
+            z-index: 2;
+            opacity: 1;
+            -webkit-transition: opacity .4s ease-in 1s;
+            transition:width opacity .4s ease-in 1s;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+        }
+
+            .mod-header.mod-hide {
+                opacity: 0;
+                
+            }
+
+ 
+            .mod-header h1 { 
+                font: 30px/1 'Lato'; font-weight: 300;
+                letter-spacing: -1px;
+                margin-bottom: 15px;
+                position: relative;
+            }
+            .mod-header h1 strong { font-weight: 900; }
+
             .share ul {
                 background: #333;
                 display: inline-block;
