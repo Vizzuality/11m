@@ -3,8 +3,15 @@
 <head>
   <title></title>
   <meta charset="UTF-8" />
-  <link href="css/reset.css" type="text/css" rel="stylesheet" />
-  <link href="css/estilos.css" type="text/css" rel="stylesheet" />
+
+
+  <!--[if IE 8]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  
+  <link href="reset.css" type="text/css" rel="stylesheet" />
+  <link href="estilos.css" type="text/css" rel="stylesheet" />
   <script src="publi.js"></script>
 
 
@@ -61,28 +68,32 @@
   <script type="infowindow/html" id="infowindow_template_2">
         <div class="cartodb-popup cartodb-popup_template_2">
            <div class="cartodb-popup-content-wrapper content_template_2">
-             <div class="cf itm-map">
-                <img src="{{content.data.foto}}" class="img_decoration_2"/>
 
-                <!-- content.data contains the field info -->
-                 <h4 class="info-title">{{{content.data.descripcion}}}</h4>
-                 <p class="info-date">{{{content.data.fecha_y_hora}}}</p>
-             </div>
+              <img src="{{content.data.foto}}" class="img_decoration_2"/>
 
 
-              <div class="player">
-                  <div class="ply-status">
-                    <span class="ply-icon play hide" id="ply-actions"></span>
-                    <span class="ply-icon mute" id="ply-actions-mute"></span>
+              <div class="cartodb-inner">
+                 <div class="cf itm-map">
+                    <!-- content.data contains the field info -->
+                     <h4 class="info-title">{{{content.data.descripcion}}}</h4>
+                     <p class="info-date">{{{content.data.fecha_y_hora}}}</p>
+                 </div>
+
+
+                  <div class="player">
+                      <div class="ply-status">
+                        <span class="ply-icon play hide" id="ply-actions"></span>
+                        <span class="ply-icon mute" id="ply-actions-mute"></span>
+                      </div>
+                      <div class="ply-progress">
+                        <span style="width: 0%" id="ply-progress-bar"></span>
+                      </div>
                   </div>
-                  <div class="ply-progress">
-                    <span style="width: 0%" id="ply-progress-bar"></span>
-                  </div>
+
+                  
+                <audio id="audioPlayer"  src="{{{content.data.url_audio}}}"  class="hide">
+                </audio>
               </div>
-
-              
-            <audio id="audioPlayer"  src="{{{content.data.url_audio}}}"  class="hide">
-            </audio>
 
            </div>
            <div class="cartodb-popup-tip-container"></div>

@@ -1,0 +1,78 @@
+#cnt-page-width{
+	width:100%;
+	background: #EDEEEF url(http://blogs.cadenaser.com/la-voz-de-inaki/files/2013/03/bg-cabecera2.gif) repeat-x top left;
+	height:165px;
+}
+#cnt-page-width.cnt_palas{
+	width: 996px;
+}
+.page-width {
+	width: 984px;
+	margin: auto;
+  position:relative;
+  z-index:1000;
+  left:11px;
+}
+#logo-ser {
+width: 108px;
+height: 160px;
+position: absolute;
+background: transparent url(http://blogs.cadenaser.com/wp-content/uploads/2012/01/logo-cadenaser.png) no-repeat top left;
+top: 0px;
+z-index: 6;
+margin-left: -21px;
+}
+#navigation-ser {
+margin-left: 96px;
+position: absolute;
+top: 126px;
+float: right;
+padding-right: 0px;
+padding-top: 0px;
+font-family: 'Droid Serif', arial, serif;
+}
+#navigation-ser a {
+font-size: 13px;
+text-decoration: none;
+color: white;
+cursor: pointer;
+font-family: verdana, arial, sans-serif;
+line-height: 22px;
+text-transform: uppercase;
+border-right: 1px dotted #666;
+border-bottom:none;
+padding: 0 9px 0 7px;
+  z-index:1000;
+}
+#enlace_cadenaser {
+position: absolute;
+top: -12px;
+left: -98px;
+width: 62px;
+height: 40px;
+border: none !important;
+border-image: initial;
+}
+ul#menu-top {
+margin: -3px 0 20px 3px;
+list-style: none;
+padding:0;
+}
+ul#menu-top li {
+padding: 0;
+display: inline;
+}
+#iconos-menu {
+width: 120px;
+margin-right: 0;
+padding: 0;
+position: absolute;
+left: 800px;
+padding-top: 4px;
+top: -3px;
+}
+#navigation-ser #iconos-menu a {
+padding: 0;
+margin: 0;
+border: none;
+}
