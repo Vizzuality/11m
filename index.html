@@ -321,7 +321,7 @@
                
 
               // Odyssey actions
-              function openInfoWindowAction(lat,lon,cartodbid, template, url) {
+              function openInfoWindowAction(lat,lon,cartodbid, template, url, url_mp3) {
                 return O.Action (function(){  
                   var self = this;
                   openInfowindow(layers[1], [+lat, +lon], cartodbid, template);
@@ -331,7 +331,7 @@
 
 
                     sound = new Howl({
-                          urls: [url]
+                          urls: [url, url_mp3]
                     });
                     sound.play();
 
@@ -392,7 +392,7 @@
                         closeInfoWindowAction(),
                         map.actions.setView(L.latLng(row.lat, row.lon), 14),
                         O.Actions.Sleep(750),
-                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow, row.url_audio)
+                        openInfoWindowAction(row.lat, row.lon, row.cartodb_id, row.infowindow, row.url_audio, row.mp3_audio)
                     )
                 )
               }
