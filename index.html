@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>Los sonidos del 11M - Cadenaser.com</title>
   <meta charset="UTF-8" />
 
 
@@ -15,9 +15,16 @@
   <script src="publi.js"></script>
 
 
-
-
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+  <meta property="og:url" content="http://www.cadenaser.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Cadena SER | Los sonidos del 11m" />
+  <meta property="og:description" content="Recorrido cronológico y sonoro que comienza pasadas las 07:30 horas del 11 de marzo de 2004" />
+  <meta property="og:site_name" content="Cadena SER" />
+  <meta property="og:image" content="images/fb.jpg" />
+  <meta property="article:publisher" content="https://www.facebook.com/cadenaser" />
+
 <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
 <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
 <link rel="stylesheet" href="11m.css" />
@@ -47,8 +54,13 @@
 
               <div class="player">
                   <div class="ply-status">
+                    <div class="ply-icon loading" id="ply-loading">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
                     <span class="ply-icon play hide" id="ply-actions"></span>
-                    <span class="ply-icon mute" id="ply-actions-mute"></span>
+                    <span class="ply-icon mute hide" id="ply-actions-mute"></span>
                   </div>
                   <div class="ply-progress">
                     <span style="width: 0%" id="ply-progress-bar"></span>
@@ -82,8 +94,13 @@
 
                   <div class="player">
                       <div class="ply-status">
+                        <div class="ply-icon loading" id="ply-loading">
+                          <div class="bounce1"></div>
+                          <div class="bounce2"></div>
+                          <div class="bounce3"></div>
+                        </div>
                         <span class="ply-icon play hide" id="ply-actions"></span>
-                        <span class="ply-icon mute" id="ply-actions-mute"></span>
+                        <span class="ply-icon mute hide" id="ply-actions-mute"></span>
                       </div>
                       <div class="ply-progress">
                         <span style="width: 0%" id="ply-progress-bar"></span>
@@ -168,11 +185,11 @@
     <div class="share">
             <ul>
                 <li class="fb">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://livingcities.cartocdn.com&t=Living+Cities+%E2%80%94+A+shared+cartographic+experiment+from+HERE+and+CartoDB" target="_blank" class="button facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.cadenaser.com/sonidos-11m&t=Los+Sonidos+%E2%80%94+del+11m" target="_blank" class="button facebook">
                     Compartir en FB</a>
                 </li>
-                <li class="tw">
-                  <a href="http://twitter.com/share?text=Los%20sonidos%20del%2011m%20shared&url=http%3A%2F%2F#&via=cadenaser.com" target="_blank" class="button twitter">Compartir en Twitter</a>
+                 <li class="tw">
+                  <a href="http://twitter.com/share?text=Los%20sonidos%20del%2011m%20-&url=http%3A%2F%2Fwww.cadenaser.com/sonidos-11m/#&via=cadenaser.com" target="_blank" class="button twitter">Compartir en Twitter</a>
                 </li>
             </ul>
     </div>
@@ -190,11 +207,11 @@
         <div class="share">
             <ul>
                 <li class="fb">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://livingcities.cartocdn.com&t=Living+Cities+%E2%80%94+A+shared+cartographic+experiment+from+HERE+and+CartoDB" target="_blank" class="button facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.cadenaser.com/sonidos-11m&t=Los+Sonidos+%E2%80%94+del+11m" target="_blank" class="button facebook">
                     Compartir en FB</a>
                 </li>
                 <li class="tw">
-                  <a href="http://twitter.com/share?text=Los%20sonidos%20del%2011m%20shared&url=http%3A%2F%2F#&via=cadenaser.com" target="_blank" class="button twitter">Compartir en Twitter</a>
+                  <a href="http://twitter.com/share?text=Los%20sonidos%20del%2011m%20-&url=http%3A%2F%2Fwww.cadenaser.com/sonidos-11m/#&via=cadenaser.com" target="_blank" class="button twitter">Compartir en Twitter</a>
                 </li>
             </ul>
         </div>
@@ -355,6 +372,12 @@
 
                     sound.on ('end', function(){
                         seq.next();
+                    })
+
+
+                    sound.on ('load', function(){
+                      addClass(document.querySelector('#ply-loading'), 'hide');
+                      removeClass(document.querySelector('#ply-actions-mute'), 'hide');
                     })
                 
                     pauseAudio();
