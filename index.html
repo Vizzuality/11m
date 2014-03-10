@@ -25,9 +25,9 @@
   <meta property="og:image" content="images/fb.jpg" />
   <meta property="article:publisher" content="https://www.facebook.com/cadenaser" />
 
-<link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
-<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
-<link rel="stylesheet" href="11m.css" />
+  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <link rel="stylesheet" href="11m.css" />
     
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
 
@@ -51,7 +51,7 @@
                  <p class="info-date">{{{content.data.fecha_y_hora}}}</p>
               </div>
              </div>
-
+             
               <div class="player">
                   <div class="ply-status">
                     <div class="ply-icon loading" id="ply-loading">
@@ -67,8 +67,14 @@
                   </div>
               </div>
 
+              <div class="audio-ios">
+                <audio id="song" controls>
+                  <source src="{{{content.data.mp3_audio}}}">
+                </audio>
+              </div>
+
               
-                <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" class="hide">
+                <audio id="audioPlayer"  src="{{{content.data.url_audio}}}"  class="hide">
                 </audio>
 
            </div>
@@ -107,8 +113,15 @@
                       </div>
                   </div>
 
-                  
-                <audio id="audioPlayer"  src="{{{content.data.url_audio}}}"  class="hide">
+                <div class="audio-ios">
+
+                  <audio id="song" controls>
+                  <source src="{{{content.data.mp3_audio}}}">
+                  </audio>
+                </div>
+                
+
+                <audio id="audioPlayer"  src="{{{content.data.url_audio}}}" class="hide">
                 </audio>
               </div>
 
@@ -227,9 +240,9 @@
 
 <!-- include cartodb.js library -->
     <script src="js/cartodb.uncompressed.js"></script>
-
     <script src="js/odyssey.js"></script>
     <script src="js/howler.min.js"></script>
+
 
 
     <script>
@@ -310,7 +323,6 @@
             sublayer.setInteraction(false);
 
           sql.execute ( 'SELECT * FROM "table_11_m_20cartodb_20_20hoja_201" ORDER BY cartodb_id').done(function (data) {
-
                 /* audio variable */
 
                 var audioLoad;
@@ -496,8 +508,6 @@
       ga('send', 'pageview');
 
     </script>
-
-
 
 </body>
 </html>

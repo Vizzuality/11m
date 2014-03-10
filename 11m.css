@@ -385,3 +385,17 @@
         -webkit-transform: scale(1.0);
       }
     }
+
+
+    /* mediaquery for audio */
+
+    .audio-ios { display: none; padding: 10px 0 0 0; }
+        .audio-ios audio { width: 374px; background: #F46A00; }
+
+    @media only screen 
+        and (min-device-width : 768px) 
+        and (max-device-width : 1024px)
+        and (-webkit-min-device-pixel-ratio: 2){
+         .audio-ios { display: block; }
+         #audioPlayer, .player { display: none; }
+        }
